@@ -7,4 +7,5 @@ Created as an open source Android experiment, the app showcases the capabilities
 The code utilizes an NDK port of the Box2D library to simulate the physics of the maze board and ball. The And Engine is used for display of game graphics using OpenGL. The OrientationProvider classes by hitlabnz.com are used to retrieve motion sensor data.
 
 Code is made available under the MIT license.
+
 Copyright (c) 2015 MediaMonks
