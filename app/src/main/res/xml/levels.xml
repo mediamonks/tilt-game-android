@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<levels levelpackage="com.mediamonks.googleflip.pages.game.physics.levels." controllerpackage="com.mediamonks.googleflip.pages.game.physics.control.">
+    <level id="1" levelclass="Level21" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="2" levelclass="Level08" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="3" levelclass="Level06" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="4" levelclass="Level22" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="5" levelclass="Level14" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="6" levelclass="Level04" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="7" levelclass="Level03" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="8" levelclass="Level23" controllerclass="GameLevelController" difficulty="0" duration="25" />
+    <level id="9" levelclass="Level20" controllerclass="GameLevelController" difficulty="1" duration="25" />
+    <level id="10" levelclass="Level02" controllerclass="GameLevelController" difficulty="1" duration="25" />
+    <level id="11" levelclass="Level01" controllerclass="GameLevelController" difficulty="1" duration="25" />
+    <level id="12" levelclass="Level07" controllerclass="GameLevelController" difficulty="1" duration="25" />
+    <level id="13" levelclass="Level19" controllerclass="GameLevelController" difficulty="1" duration="25" />
+    <level id="14" levelclass="Level12" controllerclass="GameLevelController" difficulty="1" duration="25" />
+    <level id="15" levelclass="Level15" controllerclass="GameLevelController" difficulty="1" duration="25" />
+    <level id="16" levelclass="Level10" controllerclass="GameLevelController" difficulty="2" duration="25" />
+    <level id="17" levelclass="Level17" controllerclass="GameLevelController" difficulty="2" duration="25" />
+    <level id="18" levelclass="Level16" controllerclass="GameLevelController" difficulty="2" duration="25" />
+    <level id="19" levelclass="Level09" controllerclass="GameLevelController" difficulty="2" duration="25" />
+    <level id="20" levelclass="Level05" controllerclass="GameLevelController" difficulty="2" duration="25" />
+    <level id="21" levelclass="Level13" controllerclass="GameLevelController" difficulty="2" duration="25" />
+    <level id="22" levelclass="Level18" controllerclass="GameLevelController" difficulty="2" duration="25" />
+</levels>

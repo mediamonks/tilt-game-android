@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/player_name_1"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:text="@string/app_name"
+        android:padding="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:id="@+id/player_name_2"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:text="@string/app_name"
+        android:padding="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:id="@+id/player_name_3"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:text="@string/app_name"
+        android:padding="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <TextView
+        android:id="@+id/player_name_4"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textSize="26sp"
+        android:text="@string/app_name"
+        android:padding="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+
+        <temple.core.ui.CustomButton
+            android:id="@+id/btn_next"
+            style="@style/yellow_button"
+            android:text="@string/go"/>
+    </LinearLayout>
+
+    <temple.core.ui.CustomTextView
+        android:id="@+id/tv_waiting_for_players"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:text="@string/waiting_for_players"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        style="@style/label_book"
+        />
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:background="@color/red"
+    android:baselineAligned="false"
+    android:gravity="center"
+    >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <temple.core.ui.CustomTextView
+            android:text="@string/round_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_70"
+            style="@style/label_book"
+            android:textSize="24sp"
+            />
+        <temple.core.ui.CustomTextView
+            android:id="@+id/tv_result_round1"
+            android:text="@string/result_time"
+            android:textColor="@color/white"
+            style="@style/label_book"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <temple.core.ui.CustomTextView
+            android:text="@string/round_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_70"
+            style="@style/label_book"
+            android:textSize="24sp"
+            />
+        <temple.core.ui.CustomTextView
+            android:id="@+id/tv_result_round2"
+            android:text="@string/result_time"
+            android:textColor="@color/white"
+            style="@style/label_book"
+            android:textSize="24sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+        <temple.core.ui.CustomTextView
+            android:text="@string/round_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_70"
+            style="@style/label_book"
+            android:textSize="22sp"
+            />
+        <temple.core.ui.CustomTextView
+            android:id="@+id/tv_result_round3"
+            android:text="@string/result_time"
+            android:textColor="@color/white"
+            style="@style/label_book"
+            android:textSize="25sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

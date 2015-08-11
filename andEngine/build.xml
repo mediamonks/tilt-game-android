@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="AndEngine" default="help">
+    <!-- Ant contrib -->
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="./ext/libs/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+    <!-- Boilerplate -->
+    <loadproperties srcFile="local.properties"/>
+    <property file="ant.properties"/>
+    <property environment="env"/>
+    <condition property="sdk.dir" value="${env.ANDROID_HOME}">
+        <isset property="env.ANDROID_HOME"/>
+    </condition>
+    <loadproperties srcFile="project.properties"/>
+
+    <!-- Quick check if sdk.dir exists -->
+    <fail message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through the ANDROID_HOME environment variable." unless="sdk.dir"/>
+
+    <!-- Macros -->
+    <macrodef name="property-require" description="Check if a property is set and not empty.">
+        <attribute name="property"/>
+        <sequential>
+            <fail message="Property '@{property}' must be set!">
+                <condition>
+                    <not>
+                        <isset property="@{property}"/>
+                    </not>
+                </condition>
+            </fail>
+            <fail message="Property '@{property}' must not be empty!">
+                <condition>
+                    <equals arg1="${@{property}}" arg2=""/>
+                </condition>
+            </fail>
+        </sequential>
+    </macrodef>
+
+    <!-- Targets -->
+    <target name="build-native" depends="-pre-build-native,-clean-native,-build-native"/>
+
+    <target name="-pre-build-native">
+        <property-require property="ndk"/>
+
+        <condition property="do.build-native">
+            <equals arg1="${ndk}" arg2="true"/>
+        </condition>
+        <condition property="do.clean-native">
+            <not>
+                <equals arg1="${ndk}" arg2="true"/>
+            </not>
+        </condition>
+    </target>
+
+    <target name="-build-native" if="do.build-native">
+        <exec executable="${ndk.dir}/ndk-build" failonerror="true">
+            <!-- 8 Threads -->
+            <arg value="-j8"/>
+        </exec>
+    </target>
+
+    <target name="-clean-native" depends="android_rules.clean" if="do.clean-native">
+        <exec executable="${ndk.dir}/ndk-build" failonerror="true">
+            <arg value="clean"/>
+        </exec>
+    </target>
+
+    <target name="-pre-build">
+        <antcall target="build-native"/>
+    </target>
+
+    <!-- version-tag: custom -->
+    <import file="${sdk.dir}/tools/ant/build.xml"/>
+</project>

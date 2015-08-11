@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/purple_dark"
+              android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <temple.core.ui.CustomTextView
+            style="@style/label_book"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="@string/calibration_title"
+            android:textSize="24sp"/>
+
+        <temple.core.ui.CustomTextView
+            android:id="@+id/tv_calibration_countdown"
+            style="@style/label_book"
+            android:layout_width="wrap_content"
+            android:text="@string/calibration_subtitle"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <temple.core.ui.CustomButton
+            android:id="@+id/btn_start_calibration"
+            style="@style/yellow_button"
+            android:text="@string/button_calibration"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <temple.core.ui.CustomTextView
+            style="@style/label_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/select_client_server_title"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <temple.core.ui.CustomButton
+            android:id="@+id/btn_start_new_game"
+            style="@style/purple_button"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/start_new_game"
+            />
+
+        <temple.core.ui.CustomButton
+            android:id="@+id/btn_join_game"
+            style="@style/yellow_button"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/join_existing_game"
+            />
+    </LinearLayout>
+</LinearLayout>

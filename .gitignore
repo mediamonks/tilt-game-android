@@ -1,0 +1,47 @@
+# .gitignore examples
+# https://github.com/github/gitignore
+
+# todo??
+# https://github.com/github/gitignore/blob/master/Global/NetBeans.gitignore
+# https://github.com/github/gitignore/blob/master/Symfony.gitignore
+# https://github.com/github/gitignore/blob/master/SymphonyCMS.gitignore
+# https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+# osx metadata
+.DS_Store
+
+# JetBrains project files (contains local paths)
+# https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+.idea
+
+
+# node_modules should be installed with 'npm install' in the folder containing a 'package.json'
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+node_modules
+
+# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
+# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
+# composer.lock
+composer.phar
+vendor/
+
+# a frontend build should be generated with 'grunt release' in the /tools/build/ folder
+build
+
+# build cache
+.tscache
+.sass-cache
+
+# sourcemaps
+*.css.map
+*.js.map
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Project specific
+*.iml
+.gradle
+.idea
+/local.properties
+/_design

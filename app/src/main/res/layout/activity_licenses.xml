@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/purple_dark"
+              android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:background="@drawable/close_button"/>
+
+    <temple.core.ui.CustomTextView
+        style="@style/label"
+        android:text="@string/licenses"
+        android:textSize="40sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp">
+
+        <temple.core.ui.CustomTextView
+            android:id="@+id/text"
+            style="@style/label"
+            android:gravity="left|top"
+            android:textSize="12sp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"/>
+
+    </ScrollView>
+</LinearLayout>

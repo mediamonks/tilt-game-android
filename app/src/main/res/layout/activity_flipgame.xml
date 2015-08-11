@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+    <org.andengine.opengl.view.RenderSurfaceView
+        android:id="@+id/rendersurfaceview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/ready_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/red"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- The min-height is a temporary fix for a measure issue in the Custom Span class -->
+        <com.mediamonks.googleflip.ui.animation.LargeAnimatedTextView
+            android:id="@+id/goal_label1"
+            style="@style/label_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="130dp"
+            android:text="@string/multiplayer_goal1"
+            android:textSize="36sp"/>
+
+        <!-- The min-height is a temporary fix for a measure issue in the Custom Span class -->
+        <com.mediamonks.googleflip.ui.animation.LargeAnimatedTextView
+            android:id="@+id/goal_label2"
+            style="@style/label_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-70dp"
+            android:minHeight="130dp"
+            android:text="@string/multiplayer_goal2"
+            android:textSize="36sp"/>
+
+        <!-- The min-height is a temporary fix for a measure issue in the Custom Span class -->
+        <com.mediamonks.googleflip.ui.animation.LargeAnimatedTextView
+            android:id="@+id/ready_label"
+            style="@style/label_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="130dp"
+            android:text="@string/ready"
+            android:textSize="72sp"/>
+
+        <com.mediamonks.googleflip.ui.animation.SmallAnimatedTextView
+            android:id="@+id/level_label"
+            style="@style/label_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-40dp"
+            android:minHeight="70dp"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/skip_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <temple.core.ui.CustomButton
+            android:id="@+id/skip_button"
+            style="@style/yellow_button"
+            android:text="@string/skip"/>
+    </LinearLayout>
+</RelativeLayout>

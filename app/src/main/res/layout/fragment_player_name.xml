@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <temple.core.ui.CustomTextView
+            android:id="@+id/record_label"
+            style="@style/label_medium"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="@string/screenname"
+            android:textSize="24sp"/>
+
+        <temple.core.ui.form.CustomEditText
+            android:id="@+id/tv_input_playername"
+            style="@style/label_medium"
+            android:background="@null"
+            android:inputType="textPersonName"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@null"
+            android:textSize="24sp"/>
+    </LinearLayout>
+
+    <temple.core.ui.CustomButton
+        android:id="@+id/next_button"
+        style="@style/yellow_button"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:text="@string/next"/>
+</RelativeLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- The min-height is a temporary fix for a measure issue in the Custom Span class -->
+        <com.mediamonks.googleflip.ui.animation.LargeAnimatedTextView
+            android:id="@+id/result_label1"
+            style="@style/label_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="130dp"
+            android:textSize="60sp"/>
+        <com.mediamonks.googleflip.ui.animation.LargeAnimatedTextView
+            android:id="@+id/result_label2"
+            style="@style/label_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-70dp"
+            android:minHeight="130dp"
+            android:textSize="60sp"/>
+    </LinearLayout>
+
+</LinearLayout>

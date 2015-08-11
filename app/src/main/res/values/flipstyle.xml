@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="typeface">FuturaBook</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="yellow_button" parent="button">
+        <item name="android:background">@color/yellow</item>
+    </style>
+    <style name="purple_button" parent="button">
+        <item name="android:background">@color/purple</item>
+    </style>
+    <style name="purple_dark_button" parent="button">
+        <item name="android:background">@color/purple_dark</item>
+    </style>
+    <style name="blue_button" parent="button">
+        <item name="android:background">@color/blue</item>
+    </style>
+    <style name="pink_button" parent="button">
+        <item name="android:background">@color/pink</item>
+    </style>
+    <style name="settings_button">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="typeface">FuturaBook</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+    </style>
+    <style name="label_book" parent="label">
+        <item name="typeface">FuturaBook</item>
+    </style>
+    <style name="label_medium" parent="label">
+        <item name="typeface">FuturaMedium</item>
+    </style>
+    <style name="dialog_label">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="typeface">FuturaBook</item>
+    </style>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="typeface" format="enum">
+        <enum name="FuturaBook" value="0"/>
+        <enum name="FuturaMedium" value="1"/>
+    </attr>
+</resources>

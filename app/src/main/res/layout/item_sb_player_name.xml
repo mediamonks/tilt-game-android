@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:layout_weight="1"
+              android:weightSum="10"
+    >
+
+    <temple.core.ui.CustomTextView
+        android:id="@+id/tv_player_name"
+        style="@style/label_book"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_weight="6"
+        android:gravity="start|center_vertical"
+        android:text="@string/player_name"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        />
+
+    <temple.core.ui.CustomTextView
+        android:id="@+id/tv_player_result"
+        style="@style/label_book"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_weight="4"
+        android:gravity="start|center_vertical"
+        android:text="..."
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        />
+</LinearLayout>

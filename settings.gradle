@@ -1,0 +1,1 @@
+include ':app', ':andEngine', ':andEnginePhysicsBox2DExtension', ':andEngineDebugDrawExtension', ':sensorlib', ':temple_core'

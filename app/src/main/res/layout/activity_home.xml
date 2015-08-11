@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:mm="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/logo_circle"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:background="@drawable/logo_circle"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40dp"
+                android:src="@drawable/logo"/>
+
+            <temple.core.ui.CustomTextView
+                android:id="@+id/explanation"
+                style="@style/label_book"
+                android:layout_width="wrap_content"
+                android:text="@string/home_explanation"
+                android:textSize="21sp"
+                android:lineSpacingExtra="-3dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/android_experiment"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:gravity="center_horizontal|top"
+                android:src="@drawable/android_experiment"/>
+
+            <temple.core.ui.CustomButton
+                android:id="@+id/single_player_button"
+                style="@style/purple_button"
+                android:text="@string/single_player"/>
+
+            <temple.core.ui.CustomButton
+                android:id="@+id/multi_player_button"
+                style="@style/blue_button"
+                android:text="@string/multi_player"
+                android:visibility="visible"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/include_settings" />
+
+</FrameLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/purple_dark"
+              android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="10dp"
+        android:background="@drawable/close_button"/>
+
+    <temple.core.ui.CustomTextView
+        style="@style/label"
+        android:text="@string/about"
+        android:textSize="40sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="40dp"
+        android:paddingTop="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <temple.core.ui.CustomTextView
+                android:id="@+id/text"
+                style="@style/label"
+                android:gravity="start|top"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="@string/about_body"
+                android:textSize="20sp"/>
+
+            <temple.core.ui.CustomTextView
+                android:id="@+id/tv_version"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="40dp"
+                android:text="@string/version"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

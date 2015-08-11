@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.mediamonks.googleflip"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <compatible-screens>
+        <!-- all small size screens -->
+        <screen android:screenSize="small" android:screenDensity="ldpi" />
+        <screen android:screenSize="small" android:screenDensity="mdpi" />
+        <screen android:screenSize="small" android:screenDensity="hdpi" />
+        <screen android:screenSize="small" android:screenDensity="xhdpi" />
+        <!-- all normal size screens -->
+        <screen android:screenSize="normal" android:screenDensity="ldpi" />
+        <screen android:screenSize="normal" android:screenDensity="mdpi" />
+        <screen android:screenSize="normal" android:screenDensity="hdpi" />
+        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+    </compatible-screens>
+
+    <application
+        android:name=".GoogleFlipGameApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".pages.game.FlipGameActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+        <activity
+            android:name=".pages.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".pages.connect.ConnectActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+        <activity
+            android:name=".pages.game_flow.singleplayer.SinglePlayerGameFlowActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+        <activity
+            android:name=".pages.game_flow.multiplayer.MultiPlayerGameFlowActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".pages.calibration.CalibrationActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+        <activity
+            android:name=".pages.about.AboutActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+        <activity
+            android:name=".pages.licenses.LicensesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
+
+        <!-- DATA PROVIDERS -->
+        <provider
+            android:name=".data.database.DataProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"/>
+
+        <!-- SERVICES -->
+        <service android:name=".data.services.DataService"
+                 android:exported="false" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="cb05f2e5056e3336567330882ec841be7d46b060" />
+    </application>
+</manifest>

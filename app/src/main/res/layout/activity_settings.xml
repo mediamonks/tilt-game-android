@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_ball_density"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ball_density"
+        style="@style/SeekBarLabel"
+        />
+
+    <SeekBar
+        android:id="@+id/sb_density"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_gravity_factor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gravity_factor"
+        style="@style/SeekBarLabel"
+        />
+
+    <SeekBar
+        android:id="@+id/sb_gravity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_wall_elasticity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wall_elasticity"
+        style="@style/SeekBarLabel"
+        />
+
+    <SeekBar
+        android:id="@+id/sb_wall_elasticity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/version"
+        android:textColor="@android:color/tertiary_text_dark"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:padding="10dp"
+        />
+
+</LinearLayout>
