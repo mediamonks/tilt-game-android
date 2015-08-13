@@ -334,7 +334,7 @@ public class WorldController extends Entity {
             _timeText = new Text(_width, _height - barHeight / 2, smallWhiteFont, "00.0", _engine.getVertexBufferObjectManager());
             _timeText.setOffsetCenterX(0);
             _timeText.setX(_width - (_timeText.getWidth() + (15 * _density)));
-            _timeText.setText("0.0");
+            _timeText.setText(String.format("%.01f", 0.0f));
 
             attachChild(_timeText);
         }
