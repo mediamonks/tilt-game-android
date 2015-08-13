@@ -1,32 +1,10 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
 
 def buildTime() {
     return new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"))
 }
 
 android {
-    signingConfigs {
-        releaseKey {
-            keyAlias 'releaseKey'
-            keyPassword 'releaseKey'
-            storeFile file('C:/stephan/projects/google/flip/git/google-flip-game/app/sig/releaseKey.jks')
-            storePassword 'releaseKey'
-        }
-    }
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
     defaultConfig {
@@ -49,7 +27,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "BOX2D_DEBUG", "false"
             buildConfigField "boolean", "UNLOCK_ALL", "false"
-            signingConfig signingConfigs.releaseKey
         }
     }
     productFlavors {
@@ -76,7 +53,4 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'nl.qbusict:cupboard:2.1.1'
     compile 'com.android.support:design:22.2.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.4.0@aar') {
-        transitive = true;
-    }
 }

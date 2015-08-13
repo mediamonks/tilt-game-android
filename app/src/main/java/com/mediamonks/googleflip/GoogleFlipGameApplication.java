@@ -10,7 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
 import com.mediamonks.googleflip.data.models.UserModel;
 import com.mediamonks.googleflip.data.services.DataService;
 import com.mediamonks.googleflip.data.vo.LevelResultVO;
@@ -31,7 +30,6 @@ import org.hitlabnz.sensor_fusion_demo.orientationProvider.RotationVectorProvide
 
 import java.util.List;
 
-import io.fabric.sdk.android.Fabric;
 import temple.core.net.BroadcastReceiver;
 
 /**
@@ -56,8 +54,6 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
     @Override
     public void onCreate() {
         super.onCreate();
-
-        Fabric.with(this, new Crashlytics());
 
         sIsLanding = true;
 
