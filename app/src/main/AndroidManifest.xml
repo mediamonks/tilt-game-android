@@ -1,22 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.mediamonks.googleflip"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    package="com.mediamonks.googleflip"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <compatible-screens>
         <!-- all small size screens -->
-        <screen android:screenSize="small" android:screenDensity="ldpi" />
-        <screen android:screenSize="small" android:screenDensity="mdpi" />
-        <screen android:screenSize="small" android:screenDensity="hdpi" />
-        <screen android:screenSize="small" android:screenDensity="xhdpi" />
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="small"/>
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="small"/>
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="small"/>
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="small"/>
+        <screen
+            android:screenDensity="480"
+            android:screenSize="small"/>
+        <screen
+            android:screenDensity="560"
+            android:screenSize="small"/>
+        <screen
+            android:screenDensity="640"
+            android:screenSize="small"/>
         <!-- all normal size screens -->
-        <screen android:screenSize="normal" android:screenDensity="ldpi" />
-        <screen android:screenSize="normal" android:screenDensity="mdpi" />
-        <screen android:screenSize="normal" android:screenDensity="hdpi" />
-        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="normal"/>
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="normal"/>
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="normal"/>
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="normal"/>
+        <screen
+            android:screenDensity="480"
+            android:screenSize="normal"/>
+        <screen
+            android:screenDensity="560"
+            android:screenSize="normal"/>
+        <screen
+            android:screenDensity="640"
+            android:screenSize="normal"/>
     </compatible-screens>
 
     <application
@@ -78,11 +113,12 @@
             android:exported="false"/>
 
         <!-- SERVICES -->
-        <service android:name=".data.services.DataService"
-                 android:exported="false" />
+        <service
+            android:name=".data.services.DataService"
+            android:exported="false"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="cb05f2e5056e3336567330882ec841be7d46b060" />
+            android:value="cb05f2e5056e3336567330882ec841be7d46b060"/>
     </application>
 </manifest>
