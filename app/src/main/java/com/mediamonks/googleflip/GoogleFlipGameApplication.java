@@ -5,6 +5,7 @@ import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.mediamonks.googleflip.util.LevelColorUtil;
 import com.mediamonks.googleflip.util.SoundManager;
 import com.pixplicity.easyprefs.library.Prefs;
 
+import org.hitlabnz.sensor_fusion_demo.orientationProvider.AccelerometerCompassProvider;
 import org.hitlabnz.sensor_fusion_demo.orientationProvider.OrientationProvider;
 import org.hitlabnz.sensor_fusion_demo.orientationProvider.RotationVectorProvider;
 
@@ -152,7 +154,14 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
 
     public static OrientationProvider getOrientationProvider(Activity activity) {
         if (sOrientationProvider == null) {
-            sOrientationProvider = new RotationVectorProvider((SensorManager) activity.getSystemService(SENSOR_SERVICE));
+            SensorManager sensorManager = (SensorManager) activity.getSystemService(SENSOR_SERVICE);
+            // check sensor availability and use appropriate OrientationProvider
+            if (sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null) {
+                sOrientationProvider = new RotationVectorProvider(sensorManager);
+            } else {
+                // most devices have Accelerometer and Magnetic Field sensor
+                sOrientationProvider = new AccelerometerCompassProvider(sensorManager);
+            }
         }
         return sOrientationProvider;
     }
