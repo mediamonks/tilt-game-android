@@ -23,7 +23,7 @@ public class BaseFragment extends Fragment {
 	protected View createView (int id, LayoutInflater inflater, ViewGroup container) {
 		View view = inflater.inflate(id, container, false);
 
-		ButterKnife.inject(this, view);
+		ButterKnife.bind(this, view);
 
 		return view;
 	}

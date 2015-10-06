@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Typeface;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Surface;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -116,6 +117,7 @@ public class WorldController extends Entity {
     private boolean _doDestructBall;
     private boolean _isLevelCompleted;
     private SpriteBackground _background;
+    private int _screenRotation;
 
     public WorldController(int width, int height, float scale, float density, Engine engine) {
         _width = width;
@@ -173,7 +175,7 @@ public class WorldController extends Entity {
         _flashAnimationCallback = null;
         _spawnHoleAnimationCallback = null;
 
-        _background.getSprite().dispose();
+        if(_background != null) _background.getSprite().dispose();
     }
 
     @Override
@@ -487,8 +489,9 @@ public class WorldController extends Entity {
         body.setUserData(ObjectName.EDGE_SENSOR_NAME);
     }
 
-    public void setOrientationProvider(OrientationProvider orientationProvider) {
+    public void setOrientationProvider(OrientationProvider orientationProvider, int rotation) {
         _orientationProvider = orientationProvider;
+        _screenRotation = rotation;
     }
 
     /**
@@ -505,8 +508,29 @@ public class WorldController extends Entity {
         if (_started) {
             // update gravity from phone orientation
             EulerAngles eulerAngles = _orientationProvider.getEulerAngles();
+            // get limited roll & pitch
             float roll = MathUtils.bringToBounds(-MAX_ORIENTATION_ANGLE, MAX_ORIENTATION_ANGLE, eulerAngles.getRoll());
             float pitch = MathUtils.bringToBounds(-MAX_ORIENTATION_ANGLE, MAX_ORIENTATION_ANGLE, eulerAngles.getPitch());
+            // correct for screen orientation, different on tablets than on phones
+            float swap;
+            switch (_screenRotation) {
+                case Surface.ROTATION_0:
+                    break;
+                case Surface.ROTATION_270:
+                    swap = pitch;
+                    pitch = -roll;
+                    roll = swap;
+                    break;
+                case Surface.ROTATION_180:
+                    pitch = -pitch;
+                    roll = -roll;
+                    break;
+                case Surface.ROTATION_90:
+                    swap = pitch;
+                    pitch = roll;
+                    roll = -swap;
+                    break;
+            }
             _gravity.set(_radToGravity * roll, _radToGravity * pitch);
             _gravity.add(_gravityCorrection);
             _physicsWorld.setGravity(_gravity);

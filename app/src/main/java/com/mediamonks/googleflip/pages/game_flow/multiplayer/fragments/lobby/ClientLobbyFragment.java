@@ -32,8 +32,8 @@ public class ClientLobbyFragment extends AbstractLobbyFragment {
             clientCount = clients.size();
         }
 
-        _waitingForPlayersText.setText(clientCount > 1 ? R.string.waiting_to_start_game : R.string.waiting_for_players);
-        _waitingForPlayersText.setVisibility(clientCount == 0 ? View.GONE : View.VISIBLE);
+        _lookingForHostText.setText(clientCount > 1 ? R.string.waiting_to_start_game : R.string.looking_for_host);
+        _lookingForHostText.setVisibility(clientCount == 0 ? View.GONE : View.VISIBLE);
 
     }
 }

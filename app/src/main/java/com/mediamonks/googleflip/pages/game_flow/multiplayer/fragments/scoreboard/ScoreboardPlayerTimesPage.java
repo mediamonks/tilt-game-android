@@ -51,7 +51,10 @@ public class ScoreboardPlayerTimesPage extends AbstractScoreboardPage {
 
         for (int index = 0; index < playerScores.size(); index++) {
             PlayerScoreVO playerScore = playerScores.get(index);
-            _rowMap.get(playerScore.clientVO.id).updateResults(playerScore);
+            PlayerRoundTimesView roundTimesView = _rowMap.get(playerScore.clientVO.id);
+            if (roundTimesView != null) {
+                roundTimesView.updateResults(playerScore);
+            }
         }
     }
 

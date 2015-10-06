@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.mediamonks.googleflip.data.vo.ClientVO;
 import com.mediamonks.googleflip.data.vo.PlayerScoreVO;
-import com.mediamonks.googleflip.net.common.Connection;
 import com.mediamonks.googleflip.pages.game.management.gamemessages.GameMessage;
 import com.mediamonks.googleflip.pages.game.management.gamemessages.GameMessageConverter;
 import com.mediamonks.googleflip.pages.game.management.gamemessages.c2s.C2SClientNameMessage;
@@ -18,6 +17,8 @@ import com.mediamonks.googleflip.pages.game.management.gamemessages.s2c.S2CRound
 
 import java.util.ArrayList;
 import java.util.List;
+
+import temple.multiplayer.net.common.connection.Connection;
 
 /**
  * Implementation of GameClient interface

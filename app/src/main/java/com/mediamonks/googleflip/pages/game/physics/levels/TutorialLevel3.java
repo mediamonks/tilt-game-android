@@ -18,8 +18,12 @@ public class TutorialLevel3 extends AbstractGameLevel implements GameLevel {
 
 	@Override
 	public void createLevel(PhysicsWorld world, FixtureDef fixtureDef) {
-		createBox(world, fixtureDef, _originalWidth / 2, 115, _originalWidth, 28);
-		createBox(world, fixtureDef, _originalWidth / 2, _originalHeight - (14 + (90 * _scaledDensity)), _originalWidth, 28);
+		float scaleY = _height / _originalHeight;
+		scaleY = scaleY + ((1 - scaleY) * .5f);
+		int barHeight = (int) ((70 + ((_density - 1.5) * 30)) * scaleY);
+
+		createBox(world, fixtureDef, _originalWidth / 2, 12 + (barHeight * (_originalHeight / _height)), _originalWidth, 28);
+		createBox(world, fixtureDef, _originalWidth / 2, _originalHeight - (20 + (90 * (_density / (_height / _originalHeight)))), _originalWidth, 40);
 		createBox(world, fixtureDef, 410, 701, 820, 28);
 		createBox(world, fixtureDef, 937, 902, 290, 28);
 		createBox(world, fixtureDef, 688, 1102, 268, 28);

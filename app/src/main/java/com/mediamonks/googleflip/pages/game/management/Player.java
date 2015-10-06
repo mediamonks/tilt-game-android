@@ -4,9 +4,10 @@ import com.mediamonks.googleflip.data.constants.LevelColor;
 import com.mediamonks.googleflip.data.constants.PlayerState;
 import com.mediamonks.googleflip.data.vo.LevelResultVO;
 import com.mediamonks.googleflip.data.vo.ClientVO;
-import com.mediamonks.googleflip.net.common.Connection;
 
 import java.util.List;
+
+import temple.multiplayer.net.common.connection.Connection;
 
 /**
  * Interface for player

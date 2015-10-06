@@ -25,6 +25,7 @@
         android:padding="20dp"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:visibility="gone"
         />
     <TextView
         android:id="@+id/player_name_3"
@@ -36,6 +37,7 @@
         android:padding="20dp"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:visibility="gone"
         />
     <TextView
         android:id="@+id/player_name_4"
@@ -47,6 +49,7 @@
         android:padding="20dp"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:visibility="gone"
         />
 
     <LinearLayout
@@ -69,6 +72,17 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:text="@string/waiting_for_players"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        style="@style/label_book"
+        android:layout_weight="1"
+        />
+    <temple.core.ui.CustomTextView
+        android:id="@+id/tv_looking_for_host"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:text="@string/looking_for_host"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="18sp"

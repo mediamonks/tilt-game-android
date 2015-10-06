@@ -1,20 +1,4 @@
-/*
- * Copyright (C) 2014 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package com.mediamonks.googleflip.net.bluetooth;
+package temple.multiplayer.net.bluetooth.service;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -24,12 +8,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.mediamonks.googleflip.BuildConfig;
-import com.mediamonks.googleflip.net.common.ServiceMessageHandler;
-import com.mediamonks.googleflip.net.common.ServiceMessageKeys;
-import com.mediamonks.googleflip.net.common.ServiceMessageType;
-
 import java.util.UUID;
+
+import temple.multiplayer.net.bluetooth.device.BluetoothCommunicationThread;
+import temple.multiplayer.net.common.service.ServiceMessageHandler;
+import temple.multiplayer.net.common.service.ServiceMessageKeys;
+import temple.multiplayer.net.common.service.ServiceMessageType;
 
 public abstract class AbstractBluetoothService {
     private static final String TAG = AbstractBluetoothService.class.getSimpleName();
@@ -40,18 +24,14 @@ public abstract class AbstractBluetoothService {
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
 
-    // Name for the SDP record when creating server socket
-    protected static final String NAME_SECURE = BuildConfig.APPLICATION_ID + "Secure";
-    protected static final String NAME_INSECURE = BuildConfig.APPLICATION_ID + "Insecure";
-
-    // Unique UUID for this application
-    protected static final UUID MY_UUID_SECURE = UUID.fromString("39455500-fb09-11e4-b939-0800200c9a66");
-    protected static final UUID MY_UUID_INSECURE = UUID.fromString("50242980-fd6c-11e4-b939-0800200c9a66");
-
-    // Member fields
     protected final BluetoothAdapter _adapter;
     protected final Handler _handler;
     protected int _state = STATE_IDLE;
+    protected UUID _secureUuid;
+    protected UUID _insecureUuid;
+    protected String _secureSPDName;
+    protected String _insecureSPDName;
+    protected boolean _debug;
 
     /**
      * @param handler A Handler to send messages back to the UI Activity
@@ -68,7 +48,7 @@ public abstract class AbstractBluetoothService {
      * @param state An integer defining the current connection state
      */
     protected synchronized void setState(int state) {
-        Log.d(TAG, "setState() " + _state + " -> " + state);
+        if (_debug) Log.d(TAG, "setState() " + _state + " -> " + state);
 
         _state = state;
 
@@ -100,7 +80,8 @@ public abstract class AbstractBluetoothService {
     public abstract void write(String deviceAddress, byte[] out);
 
     protected BluetoothCommunicationThread createCommunicationThread(BluetoothSocket socket, final BluetoothDevice device) {
-        BluetoothCommunicationThread communicationThread = new BluetoothCommunicationThread(socket, device.getAddress(), _handler);
+        BluetoothCommunicationThread communicationThread = new BluetoothCommunicationThread(socket, device.getAddress(), _handler, _debug);
+        communicationThread.setDebug(_debug);
         communicationThread.setConnectionLostListener(new BluetoothCommunicationThread.ConnectionLostListener() {
             @Override
             public void onConnectionLost() {
@@ -143,5 +124,22 @@ public abstract class AbstractBluetoothService {
 
     public ServiceMessageHandler getHandler() {
         return (ServiceMessageHandler) _handler;
+    }
+
+    public void setSecureUuid(String uuid) {
+        _secureUuid = UUID.fromString(uuid);
+    }
+
+    public void setInsecureUuid(String uuid) {
+        _insecureUuid = UUID.fromString(uuid);
+    }
+
+    public void setApplicationId(String id) {
+        _secureSPDName = id + "Secure";
+        _insecureSPDName = id + "Insecure";
+    }
+
+    public void setDebug (boolean debug) {
+        _debug = debug;
     }
 }

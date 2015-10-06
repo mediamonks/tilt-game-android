@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="secure_uuid">39455500-fb09-11e4-b939-0800200c9a66</string>
+    <string name="insecure_uuid">50242980-fd6c-11e4-b939-0800200c9a66</string>
+</resources>

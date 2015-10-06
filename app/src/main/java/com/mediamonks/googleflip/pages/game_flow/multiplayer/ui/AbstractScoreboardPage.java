@@ -27,7 +27,7 @@ public abstract class AbstractScoreboardPage extends BaseFragment {
 
     protected View createView (int resId, LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(resId, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         _gameClient = GoogleFlipGameApplication.getGameClient();
         _gameClientListener = new GameClientListenerAdapter() {

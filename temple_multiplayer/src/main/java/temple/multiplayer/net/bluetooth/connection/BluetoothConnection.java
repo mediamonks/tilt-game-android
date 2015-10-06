@@ -1,11 +1,13 @@
-package com.mediamonks.googleflip.net.bluetooth;
+package temple.multiplayer.net.bluetooth.connection;
 
 import android.util.Log;
 
-import com.mediamonks.googleflip.net.common.AbstractConnection;
-import com.mediamonks.googleflip.net.common.Connection;
-import com.mediamonks.googleflip.net.common.DeviceChangeListener;
-import com.mediamonks.googleflip.net.common.ServiceMessageHandler;
+import temple.multiplayer.net.bluetooth.service.AbstractBluetoothService;
+import temple.multiplayer.net.common.connection.AbstractConnection;
+import temple.multiplayer.net.common.connection.Connection;
+import temple.multiplayer.net.common.device.DeviceChangeListener;
+import temple.multiplayer.net.common.service.ServiceMessageHandler;
+
 
 /**
  * Created by stephan on 19-5-2015.
@@ -16,8 +18,10 @@ public class BluetoothConnection extends AbstractConnection implements Connectio
     private AbstractBluetoothService _service;
     private String _deviceAddress;
 
-    public BluetoothConnection(AbstractBluetoothService service, String deviceAddress) {
-        Log.d(TAG, "BluetoothConnection: created");
+    public BluetoothConnection(AbstractBluetoothService service, String deviceAddress, boolean debug) {
+        _debug = debug;
+
+        if (_debug) Log.d(TAG, "BluetoothConnection: created");
 
         _service = service;
         _deviceAddress = deviceAddress;
@@ -26,9 +30,13 @@ public class BluetoothConnection extends AbstractConnection implements Connectio
         _service.getHandler().addDeviceChangeListener(this);
     }
 
+    public BluetoothConnection(AbstractBluetoothService service, String deviceAddress) {
+        this(service, deviceAddress, false);
+    }
+
     @Override
     public void writeMessage(String message) {
-        Log.d(TAG, "writeMessage: " + message);
+        if (_debug) Log.d(TAG, "writeMessage: " + message);
 
         _service.write(_deviceAddress, message.getBytes());
     }
@@ -50,7 +58,7 @@ public class BluetoothConnection extends AbstractConnection implements Connectio
     @Override
     public void onMessageReceived(String message, String deviceAddress) {
         boolean meantForMe = _deviceAddress.equals(deviceAddress);
-        Log.d(TAG, "onMessageReceived: message = " + message + ", meantForMe = " + meantForMe + ", messageHandler = " + _messageHandler);
+        if (_debug) Log.d(TAG, "onMessageReceived: message = " + message + ", meantForMe = " + meantForMe + ", messageHandler = " + _messageHandler);
 
         if (meantForMe && (_messageHandler != null)) {
             _messageHandler.onMessageReceived(message);

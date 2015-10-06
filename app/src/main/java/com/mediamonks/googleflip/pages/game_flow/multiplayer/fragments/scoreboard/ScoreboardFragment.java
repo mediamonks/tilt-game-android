@@ -24,7 +24,7 @@ import com.mediamonks.googleflip.ui.paging.PageIndicator;
 import com.mediamonks.googleflip.util.SoundManager;
 import com.pixplicity.easyprefs.library.Prefs;
 
-import butterknife.InjectView;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
@@ -33,13 +33,13 @@ import butterknife.OnClick;
 public class ScoreboardFragment extends BaseFragment {
     private static final String TAG = ScoreboardFragment.class.getSimpleName();
 
-    @InjectView(R.id.buttons)
+    @Bind(R.id.buttons)
     protected LinearLayout _buttons;
-    @InjectView(R.id.tv_waiting_for_players)
+    @Bind(R.id.tv_waiting_for_players)
     protected TextView _waitingForPlayersText;
-    @InjectView(R.id.viewpager)
+    @Bind(R.id.viewpager)
     protected ViewPager _viewPager;
-    @InjectView(R.id.page_indicator)
+    @Bind(R.id.page_indicator)
     protected PageIndicator _pageIndicator;
 
     private ViewPager.OnPageChangeListener _pageChangeListener;

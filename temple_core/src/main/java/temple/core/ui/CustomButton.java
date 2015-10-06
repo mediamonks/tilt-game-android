@@ -74,8 +74,10 @@ public class CustomButton extends Button {
 		if(_baseBackgroundColor != 0) {
 			if(!enabled) {
 				setBackgroundColor(0xFFD3D3D3);
+				setAlpha(.75f);
 			} else {
 				setBackgroundColor(_baseBackgroundColor);
+				setAlpha(1);
 			}
 		}
 	}

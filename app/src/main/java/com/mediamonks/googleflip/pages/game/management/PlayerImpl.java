@@ -1,15 +1,14 @@
 package com.mediamonks.googleflip.pages.game.management;
 
-import android.util.Log;
-
 import com.mediamonks.googleflip.data.constants.LevelColor;
 import com.mediamonks.googleflip.data.constants.PlayerState;
-import com.mediamonks.googleflip.data.vo.LevelResultVO;
 import com.mediamonks.googleflip.data.vo.ClientVO;
-import com.mediamonks.googleflip.net.common.Connection;
+import com.mediamonks.googleflip.data.vo.LevelResultVO;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import temple.multiplayer.net.common.connection.Connection;
 
 /**
  * Implementation of game player interface

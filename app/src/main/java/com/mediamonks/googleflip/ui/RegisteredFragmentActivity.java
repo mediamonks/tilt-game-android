@@ -1,12 +1,8 @@
 package com.mediamonks.googleflip.ui;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 import com.mediamonks.googleflip.GoogleFlipGameApplication;
-import com.mediamonks.googleflip.util.ScreenUtil;
 
 /**
  * Base activity that registers itself with the application

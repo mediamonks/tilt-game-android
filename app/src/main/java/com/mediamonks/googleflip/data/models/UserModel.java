@@ -32,6 +32,7 @@ public class UserModel {
     private Context _context;
     private List<LevelVO> _levels;
     private int _selectedLevelIndex = 0;
+    private boolean _isDataLoaded;
 
     public UserModel(Context context) {
         _context = context;
@@ -218,5 +219,13 @@ public class UserModel {
 
     public List<LevelVO> getLevels() {
         return _levels;
+    }
+
+    public boolean isDataLoaded() {
+        return _isDataLoaded;
+    }
+
+    public void setIsDataLoaded(boolean isDataLoaded) {
+        _isDataLoaded = isDataLoaded;
     }
 }

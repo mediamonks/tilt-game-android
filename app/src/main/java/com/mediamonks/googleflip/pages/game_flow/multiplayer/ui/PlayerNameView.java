@@ -1,20 +1,18 @@
 package com.mediamonks.googleflip.pages.game_flow.multiplayer.ui;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mediamonks.googleflip.GoogleFlipGameApplication;
 import com.mediamonks.googleflip.R;
 import com.mediamonks.googleflip.data.vo.ClientVO;
 import com.mediamonks.googleflip.data.vo.PlayerScoreVO;
 import com.mediamonks.googleflip.util.LevelColorUtil;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Single player name view
@@ -22,9 +20,9 @@ import butterknife.InjectView;
 public class PlayerNameView {
     private static final String TAG = PlayerNameView.class.getSimpleName();
 
-    @InjectView(R.id.tv_player_name)
+    @Bind(R.id.tv_player_name)
     protected TextView _playerNameText;
-    @InjectView(R.id.tv_player_result)
+    @Bind(R.id.tv_player_result)
     protected TextView _playerResultText;
 
     private Context _context;
@@ -42,7 +40,7 @@ public class PlayerNameView {
         _clientVO = clientVO;
         _view = view;
 
-        ButterKnife.inject(this, _view);
+        ButterKnife.bind(this, _view);
 
         _playerNameText.setText(_clientVO.name);
 

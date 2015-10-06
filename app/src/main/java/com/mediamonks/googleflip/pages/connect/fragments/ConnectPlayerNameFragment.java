@@ -16,8 +16,8 @@ import com.mediamonks.googleflip.data.constants.PrefKeys;
 import com.mediamonks.googleflip.ui.BaseFragment;
 import com.pixplicity.easyprefs.library.Prefs;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import temple.core.ui.CustomButton;
 import temple.core.ui.form.CustomEditText;
@@ -28,9 +28,9 @@ import temple.core.ui.form.CustomEditText;
 public class ConnectPlayerNameFragment extends BaseFragment {
     private static final String TAG = ConnectPlayerNameFragment.class.getSimpleName();
 
-    @InjectView(R.id.tv_input_playername)
+    @Bind(R.id.tv_input_playername)
     protected CustomEditText _playerNameInput;
-    @InjectView(R.id.next_button)
+    @Bind(R.id.next_button)
     protected CustomButton _nextButton;
 
     public static ConnectPlayerNameFragment newInstance() {
@@ -41,7 +41,7 @@ public class ConnectPlayerNameFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_player_name, inflater, container);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         _playerNameInput.requestFocus();
 

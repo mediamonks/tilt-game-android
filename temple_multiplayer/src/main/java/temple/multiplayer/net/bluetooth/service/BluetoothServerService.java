@@ -1,4 +1,4 @@
-package com.mediamonks.googleflip.net.bluetooth;
+package temple.multiplayer.net.bluetooth.service;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.mediamonks.googleflip.net.common.ServiceMessageKeys;
-import com.mediamonks.googleflip.net.common.ServiceMessageType;
+import temple.multiplayer.net.bluetooth.device.BluetoothCommunicationThread;
+import temple.multiplayer.net.common.service.ServiceMessageKeys;
+import temple.multiplayer.net.common.service.ServiceMessageType;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,11 +24,9 @@ public class BluetoothServerService extends AbstractBluetoothService {
     private AcceptThread _secureAcceptThread;
     private AcceptThread _insecureAcceptThread;
     private Map<String, BluetoothCommunicationThread> _communicationThreads = new HashMap<>();
-    private Boolean isStopping = false;
+    private Boolean _isStopping = false;
 
     /**
-     * Constructor. Prepares a new BluetoothChat session.
-     *
      * @param handler A Handler to send messages back to the UI Activity
      */
     public BluetoothServerService(Handler handler) {
@@ -87,7 +86,7 @@ public class BluetoothServerService extends AbstractBluetoothService {
     }
 
     private synchronized void accepted(BluetoothSocket socket, BluetoothDevice device, String socketType) {
-        Log.d(TAG, "accepted, Socket Type:" + socketType);
+        if (_debug) Log.d(TAG, "accepted, Socket Type:" + socketType);
 
         // Start the thread to manage the connection and perform transmissions
         createCommunicationThread(socket, device);
@@ -101,7 +100,7 @@ public class BluetoothServerService extends AbstractBluetoothService {
 
     @Override
     protected void connectionLost(BluetoothDevice device) {
-        if(isStopping) return;
+        if(_isStopping) return;
 
         super.connectionLost(device);
 
@@ -114,7 +113,7 @@ public class BluetoothServerService extends AbstractBluetoothService {
 	}
 
     protected void cancelCommunicationThreads() {
-        isStopping = true;
+        _isStopping = true;
 
         for (Map.Entry<String, BluetoothCommunicationThread> entry : _communicationThreads.entrySet()) {
             BluetoothCommunicationThread communicationThread = entry.getValue();
@@ -124,7 +123,7 @@ public class BluetoothServerService extends AbstractBluetoothService {
 
         _communicationThreads.clear();
 
-        isStopping = false;
+        _isStopping = false;
     }
 
     @Override
@@ -153,9 +152,11 @@ public class BluetoothServerService extends AbstractBluetoothService {
             BluetoothServerSocket serverSocket = null;
             try {
                 if (secure) {
-                    serverSocket = _adapter.listenUsingRfcommWithServiceRecord(NAME_SECURE, MY_UUID_SECURE);
+                    if (_debug) Log.d(TAG, "AcceptThread: started listening secure, uuid = " + _secureUuid + ", spd name = " + _secureSPDName);
+                    serverSocket = _adapter.listenUsingRfcommWithServiceRecord(_secureSPDName, _secureUuid);
                 } else {
-                    serverSocket = _adapter.listenUsingInsecureRfcommWithServiceRecord(NAME_INSECURE, MY_UUID_INSECURE);
+                    if (_debug) Log.d(TAG, "AcceptThread: started listening insecure, uuid = " + _insecureUuid + ", spd name = " + _insecureSPDName);
+                    serverSocket = _adapter.listenUsingInsecureRfcommWithServiceRecord(_insecureSPDName, _insecureUuid);
                 }
             } catch (IOException e) {
                 Log.e(TAG, "AcceptThread: listen failed");
@@ -168,7 +169,7 @@ public class BluetoothServerService extends AbstractBluetoothService {
         }
 
         public void run() {
-            Log.i(TAG, "run: START AcceptThread " + this);
+            if (_debug) Log.i(TAG, "run: START AcceptThread " + this);
 
             setName("AcceptThread " + _socketType);
 
@@ -180,6 +181,7 @@ public class BluetoothServerService extends AbstractBluetoothService {
                     // This is a blocking call and will only return on a
                     // successful connection or an exception
                     socket = _serverSocket.accept();
+                    if (_debug) Log.d(TAG, "run: accepted socket for device " + socket.getRemoteDevice().getName());
                 } catch (IOException e) {
                     if (_isListening) {
                         Log.e(TAG, "run: accept failed");
@@ -189,6 +191,8 @@ public class BluetoothServerService extends AbstractBluetoothService {
 
                 // If a connection was accepted
                 if (socket != null) {
+                    if (_debug) Log.d(TAG, "run: socket found, _isListening = " + _isListening);
+
                     synchronized (BluetoothServerService.this) {
                         switch (_state) {
                             case STATE_LISTEN:
@@ -207,19 +211,23 @@ public class BluetoothServerService extends AbstractBluetoothService {
                                 break;
                         }
                     }
+
+                    socket = null;
                 }
             }
 
-            Log.i(TAG, "run: END " + this);
+            if (_debug) Log.i(TAG, "run: END " + this);
         }
 
         public void cancel() {
-            Log.d(TAG, "cancel: " + this);
+            if (_debug) Log.d(TAG, "cancel: " + this);
 
             _isListening = false;
 
             try {
                 _serverSocket.close();
+
+                if (_debug) Log.d(TAG, "cancel: server socket closed");
             } catch (IOException e) {
                 Log.e(TAG, "cancel: close failed");
                 e.printStackTrace();

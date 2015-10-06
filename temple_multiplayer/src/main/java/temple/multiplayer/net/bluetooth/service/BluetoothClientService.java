@@ -1,4 +1,4 @@
-package com.mediamonks.googleflip.net.bluetooth;
+package temple.multiplayer.net.bluetooth.service;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.mediamonks.googleflip.net.common.ServiceMessageKeys;
-import com.mediamonks.googleflip.net.common.ServiceMessageType;
+import temple.multiplayer.net.bluetooth.device.BluetoothCommunicationThread;
+import temple.multiplayer.net.common.service.ServiceMessageKeys;
+import temple.multiplayer.net.common.service.ServiceMessageType;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -20,6 +21,7 @@ public class BluetoothClientService extends AbstractBluetoothService {
 
     private ConnectThread _connectThread;
     private BluetoothCommunicationThread _communicationThread;
+
 
     /**
      * Constructor. Prepares a new BluetoothChat session.
@@ -39,7 +41,7 @@ public class BluetoothClientService extends AbstractBluetoothService {
 
     @Override
     public synchronized void stop() {
-        Log.d(TAG, "stop");
+        if (_debug) Log.d(TAG, "stop");
         super.stop();
 
         cancelConnectThread();
@@ -47,12 +49,12 @@ public class BluetoothClientService extends AbstractBluetoothService {
     }
 
     public boolean acceptServerUUID (UUID uuid) {
-        return uuid.equals(MY_UUID_INSECURE) || uuid.equals(MY_UUID_SECURE);
+        return uuid.equals(_insecureUuid) || uuid.equals(_secureUuid);
     }
 
     @Override
     public void write(String deviceAddress, byte[] out) {
-        Log.d(TAG, "write: " + out.length + " bytes to write");
+        if (_debug) Log.d(TAG, "write: " + out.length + " bytes to write");
 
         // Create temporary object
         BluetoothCommunicationThread communicationThread;
@@ -73,7 +75,7 @@ public class BluetoothClientService extends AbstractBluetoothService {
      * @param secure Socket Security type - Secure (true) , Insecure (false)
      */
     public synchronized void connect(BluetoothDevice device, boolean secure) {
-        Log.d(TAG, "connect to: " + device.getName());
+        if (_debug) Log.d(TAG, "connect to: " + device.getName());
 
         // Cancel any thread attempting to make a connection
         if (_state == STATE_CONNECTING) {
@@ -109,7 +111,7 @@ public class BluetoothClientService extends AbstractBluetoothService {
      * @param device The BluetoothDevice that has been connected
      */
     private synchronized void connected(BluetoothSocket socket, BluetoothDevice device, final String socketType) {
-        Log.d(TAG, "connected: ");
+        if (_debug) Log.d(TAG, "connected: ");
 
         cancelConnectThread();
         cancelCommunicationThread(_communicationThread);
@@ -135,7 +137,7 @@ public class BluetoothClientService extends AbstractBluetoothService {
         bundle.putString(ServiceMessageKeys.DEVICE_ADDRESS, device.getAddress());
         sendMessage(ServiceMessageType.MESSAGE_CONNECT_FAILED);
 
-        Log.d(TAG, "connectionFailed: restarting");
+        if (_debug) Log.d(TAG, "connectionFailed: restarting");
 
         setState(STATE_IDLE);
 
@@ -147,7 +149,7 @@ public class BluetoothClientService extends AbstractBluetoothService {
     protected void connectionLost(BluetoothDevice device) {
         super.connectionLost(device);
 
-        Log.d(TAG, "connectionLost: ");
+        if (_debug) Log.d(TAG, "connectionLost: ");
 
         stop();
     }
@@ -171,9 +173,9 @@ public class BluetoothClientService extends AbstractBluetoothService {
             // given BluetoothDevice
             try {
                 if (secure) {
-                    socket = device.createRfcommSocketToServiceRecord(MY_UUID_SECURE);
+                    socket = device.createRfcommSocketToServiceRecord(_secureUuid);
                 } else {
-                    socket = device.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
+                    socket = device.createInsecureRfcommSocketToServiceRecord(_insecureUuid);
                 }
             } catch (IOException e) {
                 Log.e(TAG, "ConnectThread: create failed");
@@ -210,7 +212,7 @@ public class BluetoothClientService extends AbstractBluetoothService {
                 return;
             }
 
-            Log.d(TAG, "run: socket connected");
+            if (_debug) Log.d(TAG, "run: socket connected");
 
             // Clear the ConnectThread because we're done
             synchronized (BluetoothClientService.this) {

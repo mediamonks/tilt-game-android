@@ -22,8 +22,8 @@ import com.mediamonks.googleflip.util.SoundManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Fragment for selecting a level
@@ -31,7 +31,7 @@ import butterknife.InjectView;
 public class SelectLevelFragment extends BaseFragment implements AdapterView.OnItemClickListener {
     private static final String TAG = SelectLevelFragment.class.getSimpleName();
 
-    @InjectView(R.id.list)
+    @Bind(R.id.list)
     protected ListView _list;
 
     public static SelectLevelFragment newInstance() {
@@ -42,7 +42,7 @@ public class SelectLevelFragment extends BaseFragment implements AdapterView.OnI
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = createView(R.layout.fragment_select_level, inflater, container);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         int screenHeight = getResources().getDisplayMetrics().heightPixels;
         int itemHeight;
@@ -62,7 +62,7 @@ public class SelectLevelFragment extends BaseFragment implements AdapterView.OnI
         }
         levels.addAll(GoogleFlipGameApplication.getUserModel().getLevels());
 
-        List<LevelResultVO> results = new ArrayList();
+        List<LevelResultVO> results = new ArrayList<>();
         results.addAll(GoogleFlipGameApplication.getUserModel().getLevelResults());
 
         LevelAdapter adapter = new LevelAdapter(getActivity(), levels, itemHeight, results);
@@ -77,15 +77,24 @@ public class SelectLevelFragment extends BaseFragment implements AdapterView.OnI
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         SoundManager.getInstance().play(R.raw.tap);
 
-        Intent intent = new Intent(getActivity(), FlipGameActivity.class);
+        startLevel(position);
+    }
 
+    private void startLevel(int position) {
+        final Intent intent = new Intent(getActivity(), FlipGameActivity.class);
         if (position == 0) {
             intent.putExtra(FlipGameActivity.ARG_TUTORIAL_LEVEL, 0);
         } else {
             GoogleFlipGameApplication.getUserModel().selectLevelByIndex(position - 1);
         }
-
-        startActivity(intent);
+        getActivity().startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slide_down_in, R.anim.no_change);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ButterKnife.unbind(this);
     }
 }

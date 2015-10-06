@@ -232,7 +232,7 @@ public class FlipGameActivity extends SimpleLayoutGameActivity implements GameLe
 
         _worldController = new WorldController(_cameraWidth, _cameraHeight, _scale, getResources().getDisplayMetrics().density, getEngine());
         _worldController.setDoDebugDraw(BuildConfig.BOX2D_DEBUG);
-        _worldController.setOrientationProvider(GoogleFlipGameApplication.getOrientationProvider(this));
+        _worldController.setOrientationProvider(GoogleFlipGameApplication.getOrientationProvider(this), GoogleFlipGameApplication.getScreenRotation());
         _worldController.setGameLevelStateListener(this);
 
         pOnCreateSceneCallback.onCreateSceneFinished(scene);
@@ -288,11 +288,11 @@ public class FlipGameActivity extends SimpleLayoutGameActivity implements GameLe
                 return;
             }
 
-            _skipButtonEnabled = false;
+                    _skipButtonEnabled = false;
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
                     _goalLabel1 = (LargeAnimatedTextView) _readyLayout.findViewById(R.id.goal_label1);
                     _goalLabel2 = (LargeAnimatedTextView) _readyLayout.findViewById(R.id.goal_label2);
                     _readyLabel = (LargeAnimatedTextView) _readyLayout.findViewById(R.id.ready_label);
@@ -566,12 +566,16 @@ public class FlipGameActivity extends SimpleLayoutGameActivity implements GameLe
                 intent = new Intent(this, HomeActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+
+                finish();
                 break;
             case SINGLE_PLAYER:
                 intent = new Intent(this, SinglePlayerGameFlowActivity.class);
                 intent.putExtra(IntentKeys.FRAGMENT, Fragments.GAME_FLOW_SELECT_LEVEL);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out);
+
+                finish();
                 break;
         }
     }

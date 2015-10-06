@@ -15,24 +15,17 @@ import com.mediamonks.googleflip.GoogleFlipGameApplication;
 import com.mediamonks.googleflip.R;
 import com.mediamonks.googleflip.data.constants.MultiplayerMode;
 import com.mediamonks.googleflip.data.constants.PrefKeys;
-import com.mediamonks.googleflip.data.vo.ClientVO;
-import com.mediamonks.googleflip.data.vo.PlayerScoreVO;
 import com.mediamonks.googleflip.pages.game.FlipGameActivity;
 import com.mediamonks.googleflip.pages.game.management.GameClient;
 import com.mediamonks.googleflip.pages.game.management.GameClientListener;
 import com.mediamonks.googleflip.pages.game.management.GameClientListenerAdapter;
-import com.mediamonks.googleflip.pages.game_flow.multiplayer.fragments.scoreboard.ScoreboardPagerAdapter;
 import com.mediamonks.googleflip.pages.home.HomeActivity;
 import com.mediamonks.googleflip.ui.BaseFragment;
 import com.mediamonks.googleflip.ui.paging.PageIndicator;
-import com.mediamonks.googleflip.util.LevelColorUtil;
 import com.mediamonks.googleflip.util.SoundManager;
 import com.pixplicity.easyprefs.library.Prefs;
 
-import java.util.List;
-
-import butterknife.InjectView;
-import butterknife.InjectViews;
+import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
@@ -41,17 +34,17 @@ import butterknife.OnClick;
 public class GameOverFragment extends BaseFragment {
     private static final String TAG = GameOverFragment.class.getSimpleName();
 
-    @InjectView(R.id.buttons)
+    @Bind(R.id.buttons)
     protected LinearLayout _buttons;
-    @InjectView(R.id.tv_waiting_for_players)
+    @Bind(R.id.tv_waiting_for_players)
     protected TextView _waitingForPlayersText;
-    @InjectView(R.id.btn_restart)
+    @Bind(R.id.btn_restart)
     protected Button _restartButton;
-    @InjectView(R.id.exit_button)
+    @Bind(R.id.exit_button)
     protected Button _exitButton;
-    @InjectView(R.id.viewpager)
+    @Bind(R.id.viewpager)
     protected ViewPager _viewPager;
-    @InjectView(R.id.page_indicator)
+    @Bind(R.id.page_indicator)
     protected PageIndicator _pageIndicator;
 
     private ViewPager.OnPageChangeListener _pageChangeListener;

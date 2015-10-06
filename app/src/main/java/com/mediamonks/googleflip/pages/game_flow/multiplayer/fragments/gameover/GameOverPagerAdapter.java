@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.mediamonks.googleflip.pages.game_flow.multiplayer.fragments.scoreboard.ScoreboardPlayerTimesPage;
 import com.mediamonks.googleflip.pages.game_flow.multiplayer.ui.PlayerNamesPage;
 
 /**

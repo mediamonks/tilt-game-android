@@ -1,5 +1,6 @@
 package com.mediamonks.googleflip.pages.game_flow.multiplayer;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,21 +8,19 @@ import android.widget.Toast;
 
 import com.mediamonks.googleflip.GoogleFlipGameApplication;
 import com.mediamonks.googleflip.R;
+import com.mediamonks.googleflip.data.constants.ActivityRequestCode;
 import com.mediamonks.googleflip.data.constants.Fragments;
 import com.mediamonks.googleflip.data.constants.IntentKeys;
 import com.mediamonks.googleflip.data.constants.MultiplayerMode;
 import com.mediamonks.googleflip.data.constants.PrefKeys;
 import com.mediamonks.googleflip.data.vo.ClientVO;
-import com.mediamonks.googleflip.net.bluetooth.BluetoothClientService;
-import com.mediamonks.googleflip.net.common.DeviceChangeListener;
-import com.mediamonks.googleflip.net.common.DeviceChangeListenerAdapter;
 import com.mediamonks.googleflip.pages.game.management.GameClient;
 import com.mediamonks.googleflip.pages.game.management.GameClientListener;
 import com.mediamonks.googleflip.pages.game.management.GameClientListenerAdapter;
 import com.mediamonks.googleflip.pages.game_flow.multiplayer.fragments.gameover.GameOverFragment;
+import com.mediamonks.googleflip.pages.game_flow.multiplayer.fragments.lobby.ClientLobbyFragment;
 import com.mediamonks.googleflip.pages.game_flow.multiplayer.fragments.lobby.ServerLobbyFragment;
 import com.mediamonks.googleflip.pages.game_flow.multiplayer.fragments.scoreboard.ScoreboardFragment;
-import com.mediamonks.googleflip.pages.game_flow.multiplayer.fragments.lobby.ClientLobbyFragment;
 import com.mediamonks.googleflip.pages.home.HomeActivity;
 import com.mediamonks.googleflip.ui.BaseFragment;
 import com.mediamonks.googleflip.ui.RegisteredFragmentActivity;
@@ -33,6 +32,9 @@ import org.andengine.util.ActivityUtils;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import temple.multiplayer.net.bluetooth.service.BluetoothClientService;
+import temple.multiplayer.net.common.device.DeviceChangeListener;
+import temple.multiplayer.net.common.device.DeviceChangeListenerAdapter;
 
 /**
  * Activity for multiplayer game flow
@@ -52,7 +54,7 @@ public class MultiPlayerGameFlowActivity extends RegisteredFragmentActivity impl
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_frame_container);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         ActivityUtils.keepScreenOn(this);
 
         _gameClient = GoogleFlipGameApplication.getGameClient();
@@ -178,6 +180,17 @@ public class MultiPlayerGameFlowActivity extends RegisteredFragmentActivity impl
         startActivity(intent);
 
         overridePendingTransition(R.anim.slide_down_in, R.anim.slide_down_out);
-        //super.onBackPressed();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ActivityRequestCode.REQUEST_ENABLE_SCAN) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                GoogleFlipGameApplication.stopGame();
+                finish();
+            }
+        }
     }
 }

@@ -46,4 +46,6 @@ public interface GameServer {
     void stop ();
 
     void initBackgroundColors();
+
+    boolean hasRoomForMorePlayers ();
 }

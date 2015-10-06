@@ -113,9 +113,11 @@ public class DataService extends IntentService {
 
             // insert empty LevelResultVO instances into database for new levels
             if (hasNewLevels) {
+                List<LevelResultVO> newResults = new ArrayList<>();
                 for (LevelVO levelVO : newLevels) {
-                    cupboard().withContext(this).put(LevelResultVO.URI, LevelResultVO.class, new LevelResultVO(levelVO.id));
+                    newResults.add(new LevelResultVO(levelVO.id));
                 }
+                cupboard().withContext(this).put(LevelResultVO.URI, LevelResultVO.class, newResults);
             }
         }
 

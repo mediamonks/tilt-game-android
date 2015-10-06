@@ -51,21 +51,21 @@ public class TutorialLevelController extends GameLevelController {
 
         switch (GoogleFlipGameApplication.getUserModel().getTutorialLevel()) {
             case 1:
-                explanation1 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_2).split("\n")[0];
-                explanation2 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_2).split("\n")[1];
+                explanation1 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_2a);
+                explanation2 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_2b);
                 break;
             case 2:
                 explanation1 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_3);
                 explanation2 = "";
                 break;
             default:
-                explanation1 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_1).split("\n")[0];
-                explanation2 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_1).split("\n")[1];
+                explanation1 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_1a);
+                explanation2 = GoogleFlipGameApplication.sContext.getResources().getString(R.string.tutorial_1b);
 				break;
         }
 
         _explanationText1 = new Text(textPoint.x, textPoint.y, explanationFont, explanation1, new TextOptions(HorizontalAlign.CENTER), _engine.getVertexBufferObjectManager());
-        _explanationText2 = new Text(textPoint.x, textPoint.y - (85 * heightScale), explanationFont, explanation2, new TextOptions(HorizontalAlign.CENTER), _engine.getVertexBufferObjectManager());
+        _explanationText2 = new Text(textPoint.x, textPoint.y - (_explanationText1.getHeight()), explanationFont, explanation2, new TextOptions(HorizontalAlign.CENTER), _engine.getVertexBufferObjectManager());
 
         _engine.getScene().attachChild(_explanationText1);
         _engine.getScene().attachChild(_explanationText2);

@@ -1,5 +1,6 @@
 package com.mediamonks.googleflip.pages.game.management.gamemessages;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
 import com.mediamonks.googleflip.pages.game.management.gamemessages.c2s.C2SClientNameMessage;
 import com.mediamonks.googleflip.pages.game.management.gamemessages.c2s.C2SRoundFinishedMessage;
@@ -29,6 +30,11 @@ public class GameMessageConverter {
         initClassMap();
 
         String[] messageParts = message.split("\\" + SEPARATOR);
+        if (messageParts.length < 2) {
+            Crashlytics.logException(new Exception("Message could not be split, message = '" + message + "'"));
+            return null;
+        }
+
         String typePart = messageParts[0];
         String jsonPart = messageParts[1];
 
@@ -39,13 +45,18 @@ public class GameMessageConverter {
             throw new Error("No class found for message type " + messageType);
         }
 
-        return (GameMessage) sGson.fromJson(jsonPart, sClassMap.get(messageType));
+        try {
+            return (GameMessage) sGson.fromJson(jsonPart, sClassMap.get(messageType));
+        } catch (Exception e) {
+            Crashlytics.logException(e);
+            return null;
+        }
     }
 
     public static String writeMessage(GameMessage gameMessage) {
         initGson();
 
-        return gameMessage.getType().ordinal() + SEPARATOR + sGson.toJson(gameMessage) + "\n";
+        return gameMessage.getType().ordinal() + SEPARATOR + sGson.toJson(gameMessage);
     }
 
     private static void initGson() {

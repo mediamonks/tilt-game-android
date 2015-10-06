@@ -13,8 +13,8 @@ import com.mediamonks.googleflip.data.vo.LevelVO;
 
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import temple.core.ui.CustomTextView;
 
 /**
@@ -54,9 +54,9 @@ public class LevelAdapter extends BaseAdapter {
     }
 
     private LevelResultVO getResultData(int position) {
-        if(_results != null) {
-            for(LevelResultVO result : _results) {
-                if(result.id == position) {
+        if (_results != null) {
+            for (LevelResultVO result : _results) {
+                if (result.id == position) {
                     return result;
                 }
             }
@@ -83,18 +83,18 @@ public class LevelAdapter extends BaseAdapter {
     }
 
     protected class ViewHolder {
-        @InjectView(R.id.label)
+        @Bind(R.id.label)
         protected CustomTextView _labelText;
-        @InjectView(R.id.record_label)
+        @Bind(R.id.record_label)
         protected CustomTextView _recordText;
-        @InjectView(R.id.list_item_container)
+        @Bind(R.id.list_item_container)
         protected LinearLayout _container;
 
         public ViewHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
 
-        private void update (View view, LevelVO levelVO, int position, LevelResultVO resultData) {
+        private void update(View view, LevelVO levelVO, int position, LevelResultVO resultData) {
             boolean isTutorial = (position == 0);
 
             _labelText.setText(isTutorial ? _context.getString(R.string.tutorial) : _context.getString(R.string.level_name, position));
@@ -113,8 +113,8 @@ public class LevelAdapter extends BaseAdapter {
             view.setBackgroundColor(_context.getResources().getColor(isTutorial ? R.color.yellow : R.color.transparent));
             _labelText.setTextColor(_context.getResources().getColor(unlocked ? R.color.white : R.color.white_20));
 
-            if(resultData != null && resultData.success) {
-                _recordText.setText(String.format("%.01f",resultData.seconds) + "s");
+            if (resultData != null && resultData.success) {
+                _recordText.setText(String.format("%.01f", resultData.seconds) + "s");
                 _recordText.setVisibility(View.VISIBLE);
             } else {
                 _recordText.setVisibility(View.GONE);

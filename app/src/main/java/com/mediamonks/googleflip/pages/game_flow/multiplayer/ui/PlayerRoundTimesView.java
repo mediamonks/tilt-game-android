@@ -1,7 +1,6 @@
 package com.mediamonks.googleflip.pages.game_flow.multiplayer.ui;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,8 @@ import com.mediamonks.googleflip.data.vo.ClientVO;
 import com.mediamonks.googleflip.data.vo.PlayerScoreVO;
 import com.mediamonks.googleflip.util.LevelColorUtil;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.InjectViews;
 
 /**
  * Single row with player round times
@@ -22,7 +20,7 @@ import butterknife.InjectViews;
 public class PlayerRoundTimesView {
     private static final String TAG = PlayerRoundTimesView.class.getSimpleName();
 
-    @InjectViews({R.id.tv_result_round1, R.id.tv_result_round2, R.id.tv_result_round3})
+    @Bind({R.id.tv_result_round1, R.id.tv_result_round2, R.id.tv_result_round3})
     protected TextView[] _roundResultTexts;
 
     private Context _context;
@@ -40,7 +38,7 @@ public class PlayerRoundTimesView {
         _clientVO = clientVO;
         _view = view;
 
-        ButterKnife.inject(this, _view);
+        ButterKnife.bind(this, _view);
 
         _view.setBackgroundColor(LevelColorUtil.fromLevelColor(clientVO.levelColor));
     }

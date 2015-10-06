@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.mediamonks.googleflip.net.common;
-
-import com.mediamonks.googleflip.net.bluetooth.AbstractBluetoothService;
+package temple.multiplayer.net.common.service;
 
 /**
- * Defines several constants used between {@link AbstractBluetoothService} and the UI.
+ * Defines several constants used between the service and the UI.
  */
 public enum ServiceMessageType {
 
-    // Message types sent from the BluetoothService Handler
+    // Message types sent from the ServiceMessageHandler
     MESSAGE_STATE_CHANGE,
     MESSAGE_READ,
     MESSAGE_DEVICE_ADDED,

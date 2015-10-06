@@ -39,12 +39,20 @@
                 android:text="@string/about_body"
                 android:textSize="20sp"/>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mm_games_logo"
+                android:padding="40dp"/>
+
             <temple.core.ui.CustomTextView
                 android:id="@+id/tv_version"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:padding="40dp"
+                android:paddingBottom="40dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
                 android:text="@string/version"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>

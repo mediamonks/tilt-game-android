@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.mediamonks.googleflip.GoogleFlipGameApplication;
+import com.mediamonks.googleflip.pages.game.FlipGameActivity;
 
 import org.andengine.extension.physics.box2d.PhysicsWorld;
 
@@ -18,9 +20,8 @@ public class TutorialLevel1 extends AbstractGameLevel implements GameLevel {
 
 	@Override
 	public void createLevel(PhysicsWorld world, FixtureDef fixtureDef) {
-
 		createBox(world, fixtureDef, _originalWidth / 2, 14, _originalWidth, 28);
-		createBox(world, fixtureDef, _originalWidth / 2, _originalHeight - (14 + (90 * _scaledDensity)), _originalWidth, 28);
+		createBox(world, fixtureDef, _originalWidth / 2, _originalHeight - (20 + (90 * (_density / (_height / _originalHeight)))), _originalWidth, 40);
 		createBox(world, fixtureDef, 14, _originalHeight / 2, 28, _originalHeight);
 		createBox(world, fixtureDef, _originalWidth - 14, _originalHeight / 2, 28, _originalHeight);
 	}

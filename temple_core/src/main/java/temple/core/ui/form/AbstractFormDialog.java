@@ -28,9 +28,9 @@ import temple.core.ui.form.services.IFormService;
  */
 public abstract class AbstractFormDialog extends DialogFragment {
 
-    //    @InjectView(R.id.form)
+    //    @Bind(R.id.form)
     protected View formView;
-    //    @InjectView(R.id.loading)
+    //    @Bind(R.id.loading)
     protected View loadingView;
 
     protected View _view;
@@ -131,7 +131,7 @@ public abstract class AbstractFormDialog extends DialogFragment {
     protected void setContentView(int layoutId) {
         _view = getActivity().getLayoutInflater().inflate(layoutId, null);
 
-        ButterKnife.inject(this, _view);
+        ButterKnife.bind(this, _view);
 
         _form = new Form(new IFormService() {
             public OnFormResultListener _listener;

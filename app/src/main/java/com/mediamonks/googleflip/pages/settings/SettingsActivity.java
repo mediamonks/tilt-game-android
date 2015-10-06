@@ -1,7 +1,6 @@
 package com.mediamonks.googleflip.pages.settings;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -12,8 +11,8 @@ import com.mediamonks.googleflip.pages.game.physics.constants.Physics;
 import com.mediamonks.googleflip.ui.RegisteredFragmentActivity;
 import com.mediamonks.googleflip.util.FloatPrefSeekBarController;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * Created by stephan on 8-5-2015.
@@ -21,30 +20,31 @@ import butterknife.InjectView;
 public class SettingsActivity extends RegisteredFragmentActivity {
     private static final String TAG = SettingsActivity.class.getSimpleName();
 
-    @InjectView(R.id.sb_density)
+    @Bind(R.id.sb_density)
     protected SeekBar _densitySeekBar;
-    @InjectView(R.id.tv_ball_density)
+    @Bind(R.id.tv_ball_density)
     protected TextView _ballDensityText;
-    @InjectView(R.id.sb_gravity)
+    @Bind(R.id.sb_gravity)
     protected SeekBar _gravitySeekBar;
-    @InjectView(R.id.tv_gravity_factor)
+    @Bind(R.id.tv_gravity_factor)
     protected TextView _gravityFactorText;
-    @InjectView(R.id.sb_wall_elasticity)
+    @Bind(R.id.sb_wall_elasticity)
     protected SeekBar _wallElasticitySeekBar;
-    @InjectView(R.id.tv_wall_elasticity)
+    @Bind(R.id.tv_wall_elasticity)
     protected TextView _wallElasticityText;
-    @InjectView(R.id.tv_version)
+    @Bind(R.id.tv_version)
     protected TextView _versionText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
-        FloatPrefSeekBarController controller = new FloatPrefSeekBarController(this, _densitySeekBar, _ballDensityText, R.string.ball_density, PrefKeys.BALL_DENSITY);
+        FloatPrefSeekBarController controller = new FloatPrefSeekBarController(this, _densitySeekBar, _ballDensityText, R.string.ball_density, PrefKeys
+                .BALL_DENSITY);
         controller.initValues(.01f, .5f, Physics.BALL_DENSITY);
-        
+
         controller = new FloatPrefSeekBarController(this, _gravitySeekBar, _gravityFactorText, R.string.gravity_factor, PrefKeys.GRAVITY_FACTOR);
         controller.initValues(50, 500, Physics.GRAVITY_FACTOR);
 

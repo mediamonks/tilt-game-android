@@ -139,12 +139,12 @@ public class SoundManager implements SoundPool.OnLoadCompleteListener {
     public void play(int resourceId, float volume) {
         if (sIsMuted) return;
 
-        if (!isSoundLoaded(resourceId)) {
-            throw new Error("Load sound before playing it");
+        if (isSoundLoaded(resourceId)) {
+            int streamId = _soundPool.play(_soundMap.get(resourceId), LEFT_VOLUME * volume, RIGHT_VOLUME * volume, STREAM_PRIORITY, LOOP_MODE, PLAYBACK_RATE);
+            _streamIdMap.put(_soundMap.get(resourceId), streamId);
+        } else {
+            load(resourceId);
         }
-
-        int streamId = _soundPool.play(_soundMap.get(resourceId), LEFT_VOLUME * volume, RIGHT_VOLUME * volume, STREAM_PRIORITY, LOOP_MODE, PLAYBACK_RATE);
-        _streamIdMap.put(_soundMap.get(resourceId), streamId);
     }
 
     public void play(int resourceId) {

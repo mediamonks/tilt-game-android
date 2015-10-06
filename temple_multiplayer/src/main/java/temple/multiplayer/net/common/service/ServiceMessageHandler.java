@@ -1,9 +1,10 @@
-package com.mediamonks.googleflip.net.common;
+package temple.multiplayer.net.common.service;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+
+import temple.multiplayer.net.common.device.DeviceChangeListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +99,7 @@ public class ServiceMessageHandler extends Handler{
     }
 
     public interface MessageListener {
-        void onMessageReceived (String message, String deviceAddress);
+        void onMessageReceived(String message, String deviceAddress);
     }
 
     public void addMessageListener(MessageListener listener) {

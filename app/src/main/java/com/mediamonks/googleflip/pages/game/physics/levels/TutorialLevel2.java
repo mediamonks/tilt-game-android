@@ -17,7 +17,7 @@ public class TutorialLevel2 extends AbstractGameLevel implements GameLevel {
 	@Override
 	public void createLevel(PhysicsWorld world, FixtureDef fixtureDef) {
 		createBox(world, fixtureDef, _originalWidth / 2, 14, _originalWidth, 28);
-		createBox(world, fixtureDef, _originalWidth / 2, _originalHeight - (14 + (90 * _scaledDensity)), _originalWidth, 28);
+		createBox(world, fixtureDef, _originalWidth / 2, _originalHeight - (20 + (90 * (_density / (_height / _originalHeight)))), _originalWidth, 40);
 		createBox(world, fixtureDef, _originalWidth / 2, 873, 542, 30);
 	}
 

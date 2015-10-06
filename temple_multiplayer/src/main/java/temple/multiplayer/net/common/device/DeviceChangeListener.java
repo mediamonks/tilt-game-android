@@ -1,4 +1,4 @@
-package com.mediamonks.googleflip.net.common;
+package temple.multiplayer.net.common.device;
 
 /**
  * Created by stephan on 10-6-2015.
@@ -10,5 +10,5 @@ public interface DeviceChangeListener {
 
     void onDeviceConnected(String deviceName, String deviceAddress);
 
-    void onConnectFailed (String deviceName, String deviceAddress);
+    void onConnectFailed(String deviceName, String deviceAddress);
 }

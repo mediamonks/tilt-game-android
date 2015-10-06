@@ -48,8 +48,18 @@
 -keep class com.google.inject.** { *; }
 -dontwarn com.google.gson.**
 
--keepnames class * { @butterknife.InjectView *;}
--keepnames class * { @butterknife.InjectViews *;}
+#ButterKnife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+@butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+@butterknife.* <methods>;
+}
 
 -dontwarn butterknife.internal.**
 -dontwarn retrofit.**

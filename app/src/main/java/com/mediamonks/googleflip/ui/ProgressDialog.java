@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 
 import com.mediamonks.googleflip.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * View class for showing progress
  */
 public class ProgressDialog extends DialogFragment {
 
-    @InjectView(R.id.loading)
+    @Bind(R.id.loading)
     protected View loadingView;
 
     private static ProgressDialog _instance = new ProgressDialog();
@@ -33,7 +33,7 @@ public class ProgressDialog extends DialogFragment {
         }
     }
 
-    public static void dismissInstance () {
+    public static void dismissInstance() {
         if (sIsVisible) {
             sIsVisible = false;
 
@@ -50,10 +50,10 @@ public class ProgressDialog extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.include_form_progress, container, false);
-        ButterKnife.inject(this, view);
+        ButterKnife.bind(this, view);
 
         loadingView.setVisibility(View.VISIBLE);
 

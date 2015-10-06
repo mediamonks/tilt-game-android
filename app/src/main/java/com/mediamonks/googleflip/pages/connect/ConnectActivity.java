@@ -25,7 +25,7 @@ public class ConnectActivity extends RegisteredFragmentActivity implements Navig
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_frame_container);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         navigateTo(Fragments.CONNECT_PLAYER_NAME);
     }

@@ -22,8 +22,7 @@ import com.mediamonks.googleflip.util.LevelColorUtil;
 
 import java.util.List;
 
-import butterknife.InjectView;
-import butterknife.InjectViews;
+import butterknife.Bind;
 
 /**
  * Base fragment for lobby fragments
@@ -31,13 +30,15 @@ import butterknife.InjectViews;
 public abstract class AbstractLobbyFragment extends BaseFragment {
     private static final String TAG = AbstractLobbyFragment.class.getSimpleName();
 
-    @InjectView(R.id.buttons)
+    @Bind(R.id.buttons)
     protected LinearLayout _buttons;
-    @InjectView(R.id.tv_waiting_for_players)
+    @Bind(R.id.tv_waiting_for_players)
     protected TextView _waitingForPlayersText;
-    @InjectView(R.id.btn_next)
+    @Bind(R.id.tv_looking_for_host)
+    protected TextView _lookingForHostText;
+    @Bind(R.id.btn_next)
     protected Button _nextButton;
-    @InjectViews({R.id.player_name_1, R.id.player_name_2, R.id.player_name_3, R.id.player_name_4})
+    @Bind({R.id.player_name_1, R.id.player_name_2, R.id.player_name_3, R.id.player_name_4})
     protected TextView[] _playerViews;
 
     protected GameClient _gameClient;
@@ -85,7 +86,7 @@ public abstract class AbstractLobbyFragment extends BaseFragment {
             clientCount = clients.size();
         }
 
-        for (int index = 0; index < clientCount; index++) {
+        for (int index = 0; index < clientCount && index < _playerViews.length; index++) {
             ClientVO clientVO = clients.get(index);
             TextView playerView = _playerViews[index];
 

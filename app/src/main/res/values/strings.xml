@@ -76,8 +76,8 @@
     <string name="no_bluetooth_message">No Bluetooth is available on this device</string>
     <string name="no_bluetooth_title">NO BLUETOOTH</string>
     <string name="btn_ok">OK</string>
-    <string name="calibration_title">Hold your phone steady\nwhile calibrating.</string>
-    <string name="calibration_subtitle">For best results place your\nphone on a flat surface
+    <string name="calibration_title">Hold your device steady\nwhile calibrating.</string>
+    <string name="calibration_subtitle">For best results place your\ndevice on a flat surface
     </string>
     <string name="calibration_countdown">Starting calibration in<xliff:g example="3" id="countdown">
         %d</xliff:g>\n
@@ -86,8 +86,10 @@
         %d</xliff:g>\n
     </string>
 
-    <string name="tutorial_1">Try to get the ball\ninto the portal</string>
-    <string name="tutorial_2">The ball will drop of screen\nedges without a wall</string>
+    <string name="tutorial_1a">Try to get the ball</string>
+    <string name="tutorial_1b">into the portal</string>
+    <string name="tutorial_2a">The ball will drop of screen</string>
+    <string name="tutorial_2b">edges without a wall</string>
     <string name="tutorial_3">When the time is out you lose</string>
     <string name="your_record">Your record:</string>
     <string name="waiting_for_players">Waiting for players&#8230;</string>
@@ -134,4 +136,6 @@
         Created as an open source Android experiment, the app showcases the capabilities of Android devices by highlighting the reliability of their Bluetooth connection and the responsive accuracy of
         their motion sensors.
     </string>
+    <string name="no_sensor_found_message">It looks like your device doesn\'t have the required sensors.</string>
+    <string name="no_sensor_found_title">We\'re very sorry!</string>
 </resources>

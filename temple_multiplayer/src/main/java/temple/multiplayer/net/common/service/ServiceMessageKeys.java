@@ -1,4 +1,4 @@
-package com.mediamonks.googleflip.net.common;
+package temple.multiplayer.net.common.service;
 
 /**
  * Created by STEPHAN on 2-6-2015.

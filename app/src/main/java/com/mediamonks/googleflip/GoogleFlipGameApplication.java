@@ -5,18 +5,16 @@ import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.mediamonks.googleflip.data.models.UserModel;
 import com.mediamonks.googleflip.data.services.DataService;
 import com.mediamonks.googleflip.data.vo.LevelResultVO;
 import com.mediamonks.googleflip.data.vo.LevelVO;
-import com.mediamonks.googleflip.net.bluetooth.BluetoothClientService;
-import com.mediamonks.googleflip.net.bluetooth.BluetoothServerService;
-import com.mediamonks.googleflip.net.common.ServiceMessageHandler;
 import com.mediamonks.googleflip.pages.game.management.GameClient;
 import com.mediamonks.googleflip.pages.game.management.GameClientImpl;
 import com.mediamonks.googleflip.pages.game.management.GameServer;
@@ -25,12 +23,19 @@ import com.mediamonks.googleflip.util.LevelColorUtil;
 import com.mediamonks.googleflip.util.SoundManager;
 import com.pixplicity.easyprefs.library.Prefs;
 
+import org.hitlabnz.sensor_fusion_demo.orientationProvider.AccelerometerCompassProvider;
+import org.hitlabnz.sensor_fusion_demo.orientationProvider.AccelerometerProvider;
 import org.hitlabnz.sensor_fusion_demo.orientationProvider.OrientationProvider;
 import org.hitlabnz.sensor_fusion_demo.orientationProvider.RotationVectorProvider;
 
 import java.util.List;
 
+import io.fabric.sdk.android.Fabric;
 import temple.core.net.BroadcastReceiver;
+import temple.multiplayer.net.bluetooth.service.AbstractBluetoothService;
+import temple.multiplayer.net.bluetooth.service.BluetoothClientService;
+import temple.multiplayer.net.bluetooth.service.BluetoothServerService;
+import temple.multiplayer.net.common.service.ServiceMessageHandler;
 
 /**
  * Main application class
@@ -48,12 +53,15 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
     private static GameClientImpl sGameClient;
     private static Activity sCurrentActivity;
     private static OrientationProvider sOrientationProvider;
+    private static int sScreenRotation;
     private static String sBluetoothDeviceName;
     private static boolean sIsLanding;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Fabric.with(this, new Crashlytics());
 
         sIsLanding = true;
 
@@ -67,37 +75,35 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
 
         registerActivityLifecycleCallbacks(this);
 
-        initSounds();
+        SoundManager.initialize(this);
 
         loadLevels();
     }
 
-    private void initSounds() {
-        SoundManager.initialize(this);
-        new LoadSoundsTask().execute();
-    }
-
     private void loadLevels() {
         final BroadcastReceiver receiver = new BroadcastReceiver(this, true);
-        receiver.addActionHandler(DataService.ACTION_LOAD_LEVELS,
-                new BroadcastReceiver.ActionHandler() {
-                    @Override
-                    public void onAction(String action, Intent intent) {
-                        List<LevelVO> levels = intent.getParcelableArrayListExtra(DataService.KEY_LEVELS);
-                        sUserModel.setLevels(levels);
+        receiver.addActionHandler(DataService.ACTION_LOAD_LEVELS, new BroadcastReceiver.ActionHandler() {
+            @Override
+            public void onAction(String action, Intent intent) {
+                List<LevelVO> levels = intent.getParcelableArrayListExtra(DataService.KEY_LEVELS);
+                sUserModel.setLevels(levels);
 
-                        List<LevelResultVO> results = intent.getParcelableArrayListExtra(DataService.KEY_LEVEL_RESULTS);
-                        sUserModel.setLevelResults(results);
+                List<LevelResultVO> results = intent.getParcelableArrayListExtra(DataService.KEY_LEVEL_RESULTS);
+                sUserModel.setLevelResults(results);
 
-                        if (BuildConfig.UNLOCK_ALL) {
-                            for (int i = 0; i < levels.size(); i++) {
-                                sUserModel.unlockLevel(i);
-                            }
-                        }
-
-                        receiver.onPause();
+                if (BuildConfig.UNLOCK_ALL) {
+                    for (int i = 0; i < levels.size(); i++) {
+                        sUserModel.unlockLevel(i);
                     }
-                });
+                }
+
+                sUserModel.setIsDataLoaded(true);
+
+                receiver.onPause();
+
+                new LoadSoundsTask().execute();
+            }
+        });
         receiver.onResume();
 
         DataService.loadLevels(this);
@@ -118,6 +124,7 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
     public static BluetoothServerService getBluetoothServerService() {
         if (sBluetoothServerService == null) {
             sBluetoothServerService = new BluetoothServerService(new ServiceMessageHandler());
+            initBluetoothService(sBluetoothServerService);
         }
 
         return sBluetoothServerService;
@@ -126,11 +133,21 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
     public static BluetoothClientService getBluetoothClientService() {
         if (sBluetoothClientService == null) {
             sBluetoothClientService = new BluetoothClientService(new ServiceMessageHandler());
+            initBluetoothService(sBluetoothClientService);
         }
         sBluetoothClientService.start();
 
         return sBluetoothClientService;
     }
+
+    private static void initBluetoothService(AbstractBluetoothService service) {
+        service.setDebug(BuildConfig.DEBUG);
+
+        service.setInsecureUuid(sContext.getString(R.string.insecure_uuid));
+        service.setSecureUuid(sContext.getString(R.string.secure_uuid));
+        service.setApplicationId(BuildConfig.APPLICATION_ID);
+    }
+
 
     public static GameServer getGameServer() {
         if (sGameServer == null) {
@@ -152,12 +169,19 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
 
     public static OrientationProvider getOrientationProvider(Activity activity) {
         if (sOrientationProvider == null) {
-            sOrientationProvider = new RotationVectorProvider((SensorManager) activity.getSystemService(SENSOR_SERVICE));
+            SensorManager sensorManager = (SensorManager) activity.getSystemService(SENSOR_SERVICE);
+            if (sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).size() > 0) {
+                sOrientationProvider = new RotationVectorProvider(sensorManager);
+            } else if (sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).size() > 0) {
+                sOrientationProvider = new AccelerometerCompassProvider(sensorManager);
+            } else {
+                sOrientationProvider = new AccelerometerProvider(sensorManager);
+            }
         }
         return sOrientationProvider;
     }
 
-    public static void stopGame () {
+    public static void stopGame() {
         if (sGameServer != null) {
             sGameServer.stop();
         }
@@ -226,11 +250,11 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
         }
     }
 
-    public static void setOriginalBluetoothDeviceName (String name) {
+    public static void setOriginalBluetoothDeviceName(String name) {
         sBluetoothDeviceName = name;
     }
 
-    public static void restoreBluetoothDeviceName () {
+    public static void restoreBluetoothDeviceName() {
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter != null && sBluetoothDeviceName != null) {
             // restore bluetooth device name
@@ -258,5 +282,13 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
 
             return null;
         }
+    }
+
+    public static void setScreenRotation(int rotation) {
+        sScreenRotation = rotation;
+    }
+
+    public static int getScreenRotation() {
+        return sScreenRotation;
     }
 }

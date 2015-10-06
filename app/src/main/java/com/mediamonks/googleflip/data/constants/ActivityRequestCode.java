@@ -5,4 +5,5 @@ package com.mediamonks.googleflip.data.constants;
  */
 public class ActivityRequestCode {
     public static final int REQUEST_ENABLE_BT = 1024;
+    public static final int REQUEST_ENABLE_SCAN = 1025;
 }
