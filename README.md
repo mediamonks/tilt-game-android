@@ -10,4 +10,4 @@ Code is made available under the MIT license.
 
 Copyright (c) 2015 MediaMonks
 
-For more information about Tilt visit www.androidexperiments.com
+### **this is an [android experiment](http://androidexperiments.com)**
