@@ -65,6 +65,7 @@
 -dontwarn retrofit.**
 -dontwarn okio.**
 -dontwarn com.squareup.okhttp.**
+-dontwarn org.andengine.util.**
 
 # Remove Android logging code (in this case, including errors).
 -assumenosideeffects class android.util.Log {

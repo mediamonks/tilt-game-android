@@ -60,6 +60,7 @@ import org.hitlabnz.sensor_fusion_demo.orientationProvider.OrientationProvider;
 import org.hitlabnz.sensor_fusion_demo.representation.EulerAngles;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import temple.core.utils.font.FontFaceType;
 
@@ -336,7 +337,7 @@ public class WorldController extends Entity {
             _timeText = new Text(_width, _height - barHeight / 2, smallWhiteFont, "00.0", _engine.getVertexBufferObjectManager());
             _timeText.setOffsetCenterX(0);
             _timeText.setX(_width - (_timeText.getWidth() + (15 * _density)));
-            _timeText.setText(String.format("%.01f", 0.0f));
+            _timeText.setText(String.format(Locale.getDefault(), "%.01f", 0.0f));
 
             attachChild(_timeText);
         }
@@ -574,7 +575,7 @@ public class WorldController extends Entity {
      */
     private void updateTimer(float pSecondsElapsed) {
         _timerBar.setScaleX(_timePassed / _levelDuration);
-        _timeText.setText(String.format("%.01f", _timePassed));
+        _timeText.setText(String.format(Locale.getDefault(), "%.01f", _timePassed));
 
         if (_timerBar.getScaleX() > 1.0f) {
             _timePassed = _levelDuration;

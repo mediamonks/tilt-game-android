@@ -170,7 +170,8 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
     public static OrientationProvider getOrientationProvider(Activity activity) {
         if (sOrientationProvider == null) {
             SensorManager sensorManager = (SensorManager) activity.getSystemService(SENSOR_SERVICE);
-            if (sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).size() > 0) {
+            if (sensorManager.getSensorList(Sensor.TYPE_GYROSCOPE).size() > 0 &&
+                    sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null) {
                 sOrientationProvider = new RotationVectorProvider(sensorManager);
             } else if (sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).size() > 0) {
                 sOrientationProvider = new AccelerometerCompassProvider(sensorManager);
