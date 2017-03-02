@@ -10,7 +10,6 @@ import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.crashlytics.android.Crashlytics;
 import com.mediamonks.googleflip.data.models.UserModel;
 import com.mediamonks.googleflip.data.services.DataService;
 import com.mediamonks.googleflip.data.vo.LevelResultVO;
@@ -24,13 +23,11 @@ import com.mediamonks.googleflip.util.SoundManager;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import org.hitlabnz.sensor_fusion_demo.orientationProvider.AccelerometerCompassProvider;
-import org.hitlabnz.sensor_fusion_demo.orientationProvider.AccelerometerProvider;
 import org.hitlabnz.sensor_fusion_demo.orientationProvider.OrientationProvider;
 import org.hitlabnz.sensor_fusion_demo.orientationProvider.RotationVectorProvider;
 
 import java.util.List;
 
-import io.fabric.sdk.android.Fabric;
 import temple.core.net.BroadcastReceiver;
 import temple.multiplayer.net.bluetooth.service.AbstractBluetoothService;
 import temple.multiplayer.net.bluetooth.service.BluetoothClientService;
@@ -60,8 +57,6 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
     @Override
     public void onCreate() {
         super.onCreate();
-
-        Fabric.with(this, new Crashlytics());
 
         sIsLanding = true;
 
@@ -176,7 +171,7 @@ public class GoogleFlipGameApplication extends Application implements Applicatio
             } else if (sensorManager.getSensorList(Sensor.TYPE_MAGNETIC_FIELD).size() > 0) {
                 sOrientationProvider = new AccelerometerCompassProvider(sensorManager);
             } else {
-                sOrientationProvider = new AccelerometerProvider(sensorManager);
+//                sOrientationProvider = new AccelerometerProvider(sensorManager);
             }
         }
         return sOrientationProvider;

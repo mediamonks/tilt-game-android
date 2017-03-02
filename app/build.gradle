@@ -1,18 +1,4 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
-}
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
 
 def buildTime() {
     return new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"))
@@ -20,7 +6,7 @@ def buildTime() {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23"
+    buildToolsVersion "23.0.1"
     defaultConfig {
         applicationId "com.mediamonks.tilt"
         minSdkVersion 15
@@ -51,6 +37,10 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude '.readme'
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -61,14 +51,11 @@ dependencies {
     compile project(':andEngineDebugDrawExtension')
     compile project(':temple_core')
     compile project(':temple_multiplayer')
-    compile 'com.android.support:appcompat-v7:23.0.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.android.support:support-v4:23.0.0'
+    compile 'com.android.support:support-v4:23.4.0'
     compile 'com.pixplicity.easyprefs:library:1.3'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'nl.qbusict:cupboard:2.1.1'
-    compile 'com.android.support:design:23.0.0'
-    compile('com.crashlytics.sdk.android:crashlytics:2.4.0@aar') {
-        transitive = true;
-    }
+    compile 'com.android.support:design:23.4.0'
 }
