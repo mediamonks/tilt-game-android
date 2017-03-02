@@ -45,5 +45,4 @@ coverage
 .idea
 /local.properties
 /_design
-/app/fabric.properties
 /app/sig
