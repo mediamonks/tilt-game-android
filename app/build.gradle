@@ -20,7 +20,7 @@ def buildTime() {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23"
+    buildToolsVersion "23.0.1"
     defaultConfig {
         applicationId "com.mediamonks.tilt"
         minSdkVersion 15
