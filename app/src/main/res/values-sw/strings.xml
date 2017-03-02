@@ -132,10 +132,10 @@
     <string name="womp">Womp.</string>
     <string name="multiplayer_goal1">Play 3 levels,</string>
     <string name="multiplayer_goal2">best time wins!</string>
-    <string name="about_body">Tilt is an Android adaptation of the classic handheld maze genre. While the concept of the game is the same, the fun lies in the features introduced by the player’s smartphone. The game lets players accurately navigate a variety of mazes by utilizing the motion sensors of their Android devices. With multiplayer gameplay supported  by a Bluetooth connection, players can make use of an automatic scoring system, leaderboards, and a precise timer for those split second time differences.\n\n
-        Created as an open source Android experiment, the app showcases the capabilities of Android devices by highlighting the reliability of their Bluetooth connection and the responsive accuracy of
-        their motion sensors.
-    </string>
+    <!--<string name="about_body">Tilt is an Android adaptation of the classic handheld maze genre. While the concept of the game is the same, the fun lies in the features introduced by the player’s smartphone. The game lets players accurately navigate a variety of mazes by utilizing the motion sensors of their Android devices. With multiplayer gameplay supported  by a Bluetooth connection, players can make use of an automatic scoring system, leaderboards, and a precise timer for those split second time differences.\n\n-->
+        <!--Created as an open source Android experiment, the app showcases the capabilities of Android devices by highlighting the reliability of their Bluetooth connection and the responsive accuracy of-->
+        <!--their motion sensors.-->
+    <!--</string>-->
     <string name="no_sensor_found_message">It looks like your device doesn\'t have the required sensors.</string>
     <string name="no_sensor_found_title">We\'re very sorry!</string>
 </resources>
