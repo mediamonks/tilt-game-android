@@ -16,6 +16,13 @@ android {
         buildConfigField "String", "BUILD_DATE", '"' + buildTime() + '"'
         buildConfigField "String", "BUILD_VERSION", '"' + buildTime() + '"'
     }
+
+    compileOptions {
+        encoding = "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
     buildTypes {
         debug {
             buildConfigField "boolean", "BOX2D_DEBUG", "false"
