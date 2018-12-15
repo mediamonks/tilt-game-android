@@ -8,11 +8,11 @@ android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
-        applicationId "org.literacyapp.tilt"
+        applicationId "ai.elimu.tilt"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1000000
-        versionName '1.0.0'
+        versionCode 2000000
+        versionName '2.0.0'
         buildConfigField "String", "BUILD_DATE", '"' + buildTime() + '"'
         buildConfigField "String", "BUILD_VERSION", '"' + buildTime() + '"'
     }
