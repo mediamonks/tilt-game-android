@@ -16,3 +16,4 @@ android:
 
 notifications:
   email: false
+  slack: elimu-ai:5hNcmHPFkAETjJZjrkBlNTxr
